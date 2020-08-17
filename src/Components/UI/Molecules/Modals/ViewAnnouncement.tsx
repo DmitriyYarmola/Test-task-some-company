@@ -18,6 +18,14 @@ const Title = styled.div`
 `
 
 const Text = styled.div``
+const TittleDescription = styled.div`
+	max-width: 500px;
+	word-wrap: break-word;
+`
+const TextDescription = styled.div`
+	max-width: 500px;
+	word-wrap: break-word;
+`
 const Division = styled.div`
 	font-size: 20px;
 `
@@ -40,11 +48,11 @@ export const ViewAnnouncement: React.FC<PropsType> = ({
 			<Title>View announcement</Title>
 			<Form name='create' initialValues={initialValues}>
 				<Form.Item>
-					<Text>Title: {initialValues.title}</Text>
+					<TittleDescription>Title: {initialValues.title}</TittleDescription>
 				</Form.Item>
 
 				<Form.Item>
-					<Text>Description: {initialValues.description}</Text>
+					<TextDescription>Description: {initialValues.description}</TextDescription>
 				</Form.Item>
 				<Form.Item>
 					<Text>Created at {initialValues.createdAt}</Text>

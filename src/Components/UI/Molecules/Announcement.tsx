@@ -15,6 +15,7 @@ const Item = styled.div`
 const Title = styled.span`
 	text-align: left;
 	font-size: 20px;
+	word-break: break-word;
 `
 const Actions = styled.div`
 	display: grid;
