@@ -18,7 +18,7 @@ const Title = styled.div`
 `
 
 const Text = styled.div``
-const TittleDescription = styled.div`
+const TextTtitle = styled.div`
 	max-width: 500px;
 	word-wrap: break-word;
 `
@@ -48,7 +48,7 @@ export const ViewAnnouncement: React.FC<PropsType> = ({
 			<Title>View announcement</Title>
 			<Form name='create' initialValues={initialValues}>
 				<Form.Item>
-					<TittleDescription>Title: {initialValues.title}</TittleDescription>
+					<TextTitle>Title: {initialValues.title}</TextTitle>
 				</Form.Item>
 
 				<Form.Item>
@@ -64,8 +64,10 @@ export const ViewAnnouncement: React.FC<PropsType> = ({
 							return (
 								index <= 2 && (
 									<Form.Item key={announcement.id}>
-										<Text>Title: {announcement.title}</Text>
-										<Text>Description: {announcement.description}</Text>
+										<TextTitle>Title: {announcement.title}</TextTitle>
+										<TextDescription>
+											Description: {announcement.description}
+										</TextDescription>
 									</Form.Item>
 								)
 							)
