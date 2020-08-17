@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useEffect, useState } from 'react'
+// @ts-nocheck
+import React, { useEffect, useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router'
 import { Announcement } from '@Components/UI/Molecules'
+import { searchSimilarAnnouncement } from '@Components/Lib/searchSimilarAnnouncement'
 import { Button } from '@UI/Atoms'
 import { AnnouncementType } from '@Pages/Annoucement/Model'
 import { Search } from './Actions'
@@ -48,40 +50,41 @@ export const Announcements: React.FC<PropsType> = ({
 
 	const onEdit = (id: number, title: string, description: string): void => {
 		history.push({
-			pathname: `/edit?item=${id}`,
-			//@ts-ignore
+			pathname: `/edit`,
 			state: { initialValues: { id, title, description } },
 		})
 	}
 	const onDelete = (id: number): void => {
-		//@ts-ignore
-		history.push({ pathname: `/delete?item=${id}`, state: { id } })
+		history.push({ pathname: `/delete`, state: { id } })
 	}
 
-	const onView = (id: number, title: string, description: string, createdAt: string) => {
-		history.push({
-			pathname: `/view?item=${id}`,
-			//@ts-ignore
-			state: { id, title, description, createdAt },
-		})
-	}
+	const onView = useCallback(
+		(id: number, title: string, description: string, createdAt: string) => {
+			const similar = announcements.filter((announcement) =>
+				searchSimilarAnnouncement(id, title, description, announcement)
+			)
+			history.push({
+				pathname: `/view`,
+				state: { id, title, description, createdAt, similar },
+			})
+		},
+		[announcements, history]
+	)
 	const createAnnouncement = (): void => {
 		history.push({ pathname: '/create' })
 	}
 
 	const items = results.map((announcement) => (
-		<>
-			<Announcement
-				key={announcement.id}
-				description={announcement.description}
-				title={announcement.title}
-				createdAt={announcement.createdAt}
-				onDelete={onDelete}
-				onEdit={onEdit}
-				onView={onView}
-				id={announcement.id}
-			/>
-		</>
+		<Announcement
+			key={announcement.id}
+			description={announcement.description}
+			title={announcement.title}
+			createdAt={announcement.createdAt}
+			onDelete={onDelete}
+			onEdit={onEdit}
+			onView={onView}
+			id={announcement.id}
+		/>
 	))
 	return (
 		<>

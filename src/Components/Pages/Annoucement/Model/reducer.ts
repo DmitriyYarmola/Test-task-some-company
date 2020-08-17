@@ -2,7 +2,9 @@ import { ActionsType, AnnouncementType } from './actions'
 import * as types from './types'
 
 const initialState = {
-	announcements: [{ title: 'test' }] as AnnouncementType[],
+	announcements: [
+		{ title: 'test', description: 'test descr', createdAt: '11 2032 09 15:55', id: 1 },
+	] as AnnouncementType[],
 }
 
 type InitialStateType = typeof initialState

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useLocation, Redirect } from 'react-router'
 
 const PositionWrapped = styled.div`
 	position: absolute;
@@ -27,6 +28,9 @@ interface PropsType {
 	children: React.ReactNode
 }
 export const FormTemplate: React.FC<PropsType> = ({ children }) => {
+	const { state } = useLocation()
+	console.log("state", state)
+	// if (!state) return <Redirect to='/' />
 	return (
 		<PositionWrapped>
 			<Wrapped>{children}</Wrapped>

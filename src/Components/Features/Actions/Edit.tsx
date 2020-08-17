@@ -1,6 +1,6 @@
 import React from 'react'
 import { Store } from 'antd/lib/form/interface'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory, useLocation, Redirect } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { message } from 'antd'
 import { EditAnnouncement } from '@UI/Molecules/Modals'
@@ -11,6 +11,7 @@ export const Edit = (): React.ReactElement => {
 	const location = useLocation()
 	const dispatch = useDispatch()
 	const { state } = location
+	if (!state) return <Redirect to='/' />
 	const onEdit = (formData: Store): void => {
 		const { title, description } = formData
 		const announcement = {
