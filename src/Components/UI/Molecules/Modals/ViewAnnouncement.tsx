@@ -18,7 +18,7 @@ const Title = styled.div`
 `
 
 const Text = styled.div``
-const TextTtitle = styled.div`
+const TextTitle = styled.div`
 	max-width: 500px;
 	word-wrap: break-word;
 `
